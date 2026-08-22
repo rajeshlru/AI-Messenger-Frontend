@@ -2889,7 +2889,7 @@ function FileMenu({
                 ".pdf,.txt,.json,.java,.js,.jsx,.ts,.tsx,.py,.c,.cpp,.h,.html,.css,.sql,.png,.jpg,.jpeg,.gif,.webp",
               )
             }
-          className={`
+            className={`
   w-full
   flex
   items-center
@@ -2913,7 +2913,7 @@ function FileMenu({
           <button
             type="button"
             onClick={() => selectFile(".txt")}
-           className={`
+            className={`
   w-full
   flex
   items-center
@@ -2937,7 +2937,7 @@ function FileMenu({
           <button
             type="button"
             onClick={() => selectFile(".json")}
-          className={`
+            className={`
   w-full
   flex
   items-center
@@ -2965,7 +2965,7 @@ function FileMenu({
                 ".java,.js,.jsx,.ts,.tsx,.py,.c,.cpp,.h,.html,.css,.sql",
               )
             }
-          className={`
+            className={`
   w-full
   flex
   items-center
@@ -2989,7 +2989,7 @@ function FileMenu({
           <button
             type="button"
             onClick={() => selectFile(".png,.jpg,.jpeg,.gif,.webp")}
-         className={`
+            className={`
   w-full
   flex
   items-center
