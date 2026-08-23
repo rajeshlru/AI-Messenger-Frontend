@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-
+import ThemeToggle from "../components/ThemeToggle";
 function Login() {
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const isLight = theme === "light";
@@ -84,18 +84,7 @@ function Login() {
         isLight ? "bg-gray-50 text-gray-900" : "bg-[#080b12] text-white"
       }`}
     >
-      <button
-        type="button"
-        onClick={toggleTheme}
-        className={`absolute top-5 right-5 z-50 w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300 ${
-          isLight
-            ? "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
-            : "bg-[#11161f] border-white/[0.08] text-gray-300 hover:bg-white/[0.06] hover:text-white"
-        }`}
-        title={isLight ? "Switch to dark theme" : "Switch to light theme"}
-      >
-        {isLight ? "🌙" : "☀️"}
-      </button>
+      <ThemeToggle />
       <div className="absolute inset-0 opacity-[0.018] bg-[linear-gradient(rgba(255,255,255,1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,1)_1px,transparent_1px)] bg-[size:40px_40px] animate-[gridMove_18s_linear_infinite]" />
 
       <div className="relative z-10 w-full max-w-[430px] sm:max-w-[460px]">

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-
+import ThemeToggle from "../components/ThemeToggle";
 function Home() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const isLight = theme === "light";
 
   return (
@@ -79,58 +79,8 @@ function Home() {
 
               <span className="relative">Get Started</span>
             </Link>
-
-            <button
-              type="button"
-              onClick={toggleTheme}
-              title={isLight ? "Switch to dark theme" : "Switch to light theme"}
-              className={`
-                hidden sm:flex
-                w-11
-                h-11
-                rounded-xl
-                items-center
-                justify-center
-                border
-                transition-all
-                duration-200
-                shrink-0
-
-                ${
-                  isLight
-                    ? "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
-                    : "bg-[#11161f] border-white/[0.08] text-gray-300 hover:bg-[#181e28] hover:text-white"
-                }
-              `}
-            >
-              {isLight ? "🌙" : "☀️"}
-            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={toggleTheme}
-            title={isLight ? "Switch to dark theme" : "Switch to light theme"}
-            className={`
-              flex sm:hidden
-              w-10
-              h-10
-              rounded-xl
-              items-center
-              justify-center
-              border
-              transition-all
-              duration-200
-
-              ${
-                isLight
-                  ? "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
-                  : "bg-[#11161f] border-white/[0.08] text-gray-300 hover:bg-[#181e28] hover:text-white"
-              }
-            `}
-          >
-            {isLight ? "🌙" : "☀️"}
-          </button>
+          <ThemeToggle inline />
         </div>
       </nav>
 

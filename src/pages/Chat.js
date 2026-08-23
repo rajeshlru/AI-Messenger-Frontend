@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import ThemeToggle from "../components/ThemeToggle";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import AdminModal from "./AdminModal";
 import { useTheme } from "../context/ThemeContext";
+import ThemeToggleButton from "../context/ThemeToggleButton";
 import {
   getConversations,
   createConversation,
@@ -18,7 +19,7 @@ import {
 } from "../services/api";
 
 function Chat() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const isLight = theme === "light";
   const navigate = useNavigate();
 
@@ -1038,7 +1039,9 @@ function Chat() {
               </div>
 
               <div>
-                <h1 className="font-semibold tracking-tight">Messenger</h1>
+                <h1 className="font-semibold tracking-tight top-6 ">
+                  Messenger
+                </h1>
 
                 <p className="text-[10px] text-gray-600 mt-0.5">
                   Personal workspace
@@ -1550,43 +1553,85 @@ function Chat() {
               <button
                 type="button"
                 onClick={openSettings}
-                className="
-                  w-full
-                  flex
-                  items-center
-                  gap-3
-                  px-3
-                  py-2.5
-                  rounded-xl
-                  text-sm
-                  text-gray-300
-                  hover:text-white
-                  hover:bg-white/[0.06]
-                  transition
-                "
+                className={`
+    w-full
+    flex
+    items-center
+    gap-3
+    px-3
+    py-2.5
+    rounded-xl
+    text-sm
+    text-gray-300
+    hover:text-white
+    hover:bg-white/[0.06]
+    hover:-translate-y-0.5
+    hover:scale-[1.01]
+    transition-all
+    duration-300
+    ease-out
+    ${
+      isLight
+        ? "text-slate-700 bg-slate-200/70 hover:bg-slate-300/70 hover:text-slate-900 mb-2"
+        : "text-gray-300 hover:text-white hover:bg-white/[0.05]"
+    }
+  `}
               >
                 <span className="text-base">⚙</span>
 
                 <span>Settings</span>
               </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setProfileMenuOpen(false);
+                  navigate("/about");
+                }}
+                className="
+    w-full
+    flex
+    items-center
+    gap-3
+    px-3
+    my-2
+    py-2.5
+    rounded-xl
+    text-sm
+    text-gray-300
+    hover:text-white
+    hover:bg-white/[0.06]
+    hover:-translate-y-0.5
+    hover:scale-[1.01]
+    transition-all
+    duration-300
+    ease-out
+  "
+              >
+                <span className="text-base">👨‍💻</span>
 
+                <span>About Developer</span>
+              </button>
               <button
                 type="button"
                 onClick={requestLogout}
                 className="
-                  w-full
-                  flex
-                  items-center
-                  gap-3
-                  px-3
-                  py-2.5
-                  rounded-xl
-                  text-sm
-                  text-gray-300
-                  hover:text-red-400
-                  hover:bg-red-500/10
-                  transition
-                "
+    w-full
+    flex
+    items-center
+    gap-3
+    px-3
+    py-2.5
+    rounded-xl
+    text-sm
+    text-gray-300
+    hover:text-red-400
+    hover:bg-red-500/10
+    hover:-translate-y-0.5
+    hover:scale-[1.01]
+    transition-all
+    duration-300
+    ease-out
+  "
               >
                 <span className="text-base">↪</span>
 
@@ -1598,7 +1643,7 @@ function Chat() {
       </aside>
 
       <main className="flex-1 min-w-0 flex flex-col bg-[#090d12]">
-        <header className="h-14 flex-shrink-0 border-b border-white/[0.05] flex items-center px-4 md:px-6">
+        <header className="h-16 flex-shrink-0 border-b border-white/[0.05] flex items-center px-4 md:px-6">
           <div className="flex items-center gap-3 min-w-0">
             <button
               onClick={() => setMobileSidebar(true)}
@@ -1630,30 +1675,7 @@ function Chat() {
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="
-      ml-auto
-      w-9
-      h-9
-      rounded-xl
-      flex
-      items-center
-      justify-center
-      text-gray-400
-      hover:text-white
-      hover:bg-white/[0.06]
-      transition
-    "
-            title={
-              theme === "dark"
-                ? "Switch to light theme"
-                : "Switch to dark theme"
-            }
-          >
-            {theme === "dark" ? "☀️" : "🌙"}
-          </button>
+          <ThemeToggle />
         </header>
 
         {error && (
@@ -2180,40 +2202,7 @@ function Chat() {
                     </div>
                   </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className={`
-    w-full
-    flex
-    items-center
-    gap-3
-    px-3
-    py-3.5
-    rounded-xl
-    text-left
-    transition
-    ${
-      isLight
-        ? "text-slate-700 bg-slate-200/70 hover:bg-slate-300/70 hover:text-slate-900 mb-2"
-        : "text-gray-300 hover:text-white hover:bg-white/[0.05]"
-    }
-  `}
-                >
-                  <div className="w-9 h-9 rounded-lg bg-violet-500/10 text-violet-400 flex items-center justify-center">
-                    {theme === "dark" ? "☀️" : "🌙"}
-                  </div>
-
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">
-                      {theme === "dark" ? "Light theme" : "Dark theme"}
-                    </p>
-
-                    <p className="text-[10px] text-gray-600 mt-0.5">
-                      Switch your appearance
-                    </p>
-                  </div>
-                </button>
+                <ThemeToggleButton />
                 <button
                   type="button"
                   onClick={() => {

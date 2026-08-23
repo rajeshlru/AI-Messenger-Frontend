@@ -5,7 +5,7 @@ import ThemeToggle from "../components/ThemeToggle";
 
 function Register() {
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -146,18 +146,7 @@ function Register() {
       }`}
     >
       {" "}
-      <button
-        type="button"
-        onClick={toggleTheme}
-        className={`absolute top-5 right-5 z-50 w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300 ${
-          isLight
-            ? "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
-            : "bg-[#11161f] border-white/[0.08] text-gray-300 hover:bg-white/[0.06] hover:text-white"
-        }`}
-        title={isLight ? "Switch to dark theme" : "Switch to light theme"}
-      >
-        {isLight ? "🌙" : "☀️"}
-      </button>
+      <ThemeToggle />{" "}
       <div className="absolute w-72 h-72 sm:w-96 sm:h-96 bg-violet-600/10 rounded-full blur-[120px] -top-32 -left-32 animate-pulse" />
       <div className="absolute w-72 h-72 sm:w-96 sm:h-96 bg-cyan-500/10 rounded-full blur-[120px] -bottom-40 -right-32 animate-pulse" />
       <div className="absolute w-56 h-56 bg-pink-500/[0.06] rounded-full blur-[100px] top-1/2 left-1/2 animate-[floatGlow_7s_ease-in-out_infinite]" />
