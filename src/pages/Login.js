@@ -350,50 +350,134 @@ function Login() {
                 type="submit"
                 disabled={loading}
                 className={`
-                  group
-                  relative
-                  w-full
-                  h-[50px]
-                  mt-1
-                  overflow-hidden
-                  rounded-xl
-                  bg-gradient-to-r
-                  from-blue-600
-                  via-indigo-600
-                  to-purple-600
-                  text-white
-                  text-sm
-                  sm:text-base
-                  font-semibold
-                  shadow-lg
-                  shadow-blue-900/20
-                  transition-all
-                  duration-300
-                  ${
-                    loading
-                      ? "opacity-80 cursor-wait"
-                      : "hover:from-blue-500 hover:via-indigo-500 hover:to-purple-500 hover:shadow-xl hover:shadow-blue-900/30 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98]"
-                  }
-                  animate-[buttonIn_0.6s_ease-out_0.5s_both]
-                `}
+    group
+    relative
+    w-full
+    h-[50px]
+    mt-1
+    overflow-hidden
+    rounded-xl
+    text-sm
+    sm:text-base
+    font-semibold
+    transition-all
+    duration-300
+    border
+
+    ${
+      isLight
+        ? `
+          bg-gradient-to-r
+          from-cyan-400
+          via-blue-500
+          to-violet-500
+          text-gray-950
+          border-blue-400/20
+          shadow-lg
+          shadow-blue-500/20
+        `
+        : `
+          bg-gradient-to-r
+          from-blue-400
+          via-indigo-500
+          to-purple-600
+          text-white
+          border-white/10
+          shadow-lg
+          shadow-blue-900/25
+        `
+    }
+
+    ${
+      loading
+        ? `
+          opacity-95
+          cursor-wait
+        `
+        : `
+          hover:-translate-y-1
+          hover:shadow-xl
+          active:translate-y-0
+          active:scale-[0.98]
+        `
+    }
+
+    animate-[buttonIn_0.6s_ease-out_0.5s_both]
+  `}
               >
                 {!loading && (
                   <>
-                    <span className="absolute inset-y-0 -left-20 w-16 bg-white/20 skew-x-[-20deg] transition-all duration-700 group-hover:left-[120%]" />
+                    <span className="absolute inset-y-0 -left-20 w-16 bg-white/25 skew-x-[-20deg] transition-all duration-700 group-hover:left-[120%]" />
 
                     <span className="absolute inset-0 rounded-xl ring-1 ring-white/0 group-hover:ring-white/20 transition-all duration-300" />
+
+                    <span
+                      className={`
+          absolute
+          -inset-1
+          opacity-0
+          blur-xl
+          transition-opacity
+          duration-500
+          group-hover:opacity-30
+          pointer-events-none
+          ${
+            isLight
+              ? "bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500"
+              : "bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600"
+          }
+        `}
+                    />
                   </>
                 )}
 
-                <span className="relative z-10 flex items-center justify-center gap-2.5">
+                <span className="relative z-10 flex items-center justify-center gap-3">
                   {loading ? (
                     <>
-                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span
+                        className={`
+            w-5
+            h-5
+            rounded-full
+            border-[3px]
+            animate-spin
+            flex-shrink-0
 
-                      <span>Signing in...</span>
+            ${
+              isLight
+                ? `
+                  border-blue-900/20
+                  border-t-blue-950
+                  border-r-violet-900
+                `
+                : `
+                  border-white/25
+                  border-t-white
+                  border-r-cyan-200
+                `
+            }
+          `}
+                      />
+
+                      <span
+                        className={`
+            font-semibold
+            tracking-wide
+            ${isLight ? "text-gray-950" : "text-white"}
+          `}
+                      >
+                        Signing in...
+                      </span>
                     </>
                   ) : (
-                    <span>Login</span>
+                    <span
+                      className={`
+          font-semibold
+          ${isLight ? "text-gray-950" : "text-white"}
+        `}
+                    >
+                      Login
+                    </span>
                   )}
                 </span>
               </button>

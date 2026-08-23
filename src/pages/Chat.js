@@ -2114,7 +2114,7 @@ function Chat() {
       flex
       items-center
       justify-center
-      px-4
+      px-4 
     "
           onClick={closeSettings}
         >
@@ -2183,7 +2183,7 @@ function Chat() {
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="
+                  className={`
     w-full
     flex
     items-center
@@ -2192,11 +2192,13 @@ function Chat() {
     py-3.5
     rounded-xl
     text-left
-    text-gray-300
-    hover:text-white
-    hover:bg-white/[0.05]
     transition
-  "
+    ${
+      isLight
+        ? "text-slate-700 bg-slate-200/70 hover:bg-slate-300/70 hover:text-slate-900 mb-2"
+        : "text-gray-300 hover:text-white hover:bg-white/[0.05]"
+    }
+  `}
                 >
                   <div className="w-9 h-9 rounded-lg bg-violet-500/10 text-violet-400 flex items-center justify-center">
                     {theme === "dark" ? "☀️" : "🌙"}
@@ -2214,8 +2216,44 @@ function Chat() {
                 </button>
                 <button
                   type="button"
+                  onClick={() => {
+                    setChangePasswordOpen(true);
+                    setPasswordError("");
+                    setPasswordSuccess("");
+                  }}
+                  className={`
+    w-full
+    flex
+    items-center
+    gap-3
+    px-3
+    py-3.5
+    rounded-xl
+    text-left
+    transition
+    ${
+      isLight
+        ? "text-slate-700 bg-slate-200/70 hover:bg-slate-300/70 hover:text-slate-900 mb-2"
+        : "text-gray-300 hover:text-white hover:bg-white/[0.05]"
+    }
+  `}
+                >
+                  <div className="w-9 h-9 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                    🔐
+                  </div>
+
+                  <div className="flex-1">
+                    <p className="text-sm font-medium">Change password</p>
+
+                    <p className="text-[10px] text-gray-600 mt-0.5">
+                      Update your account password
+                    </p>
+                  </div>
+                </button>
+                <button
+                  type="button"
                   onClick={requestLogout}
-                  className="
+                  className={`
               w-full
               flex
               items-center
@@ -2224,11 +2262,13 @@ function Chat() {
               py-3.5
               rounded-xl
               text-left
-              text-gray-300
-              hover:text-white
-              hover:bg-white/[0.05]
               transition
-            "
+              ${
+                isLight
+                  ? "text-slate-700 bg-slate-200/70 hover:bg-slate-300/70 hover:text-slate-900"
+                  : "text-gray-300 hover:text-white hover:bg-white/[0.05]"
+              }
+            `}
                 >
                   <div className="w-9 h-9 rounded-lg bg-white/[0.04] text-gray-400 flex items-center justify-center">
                     ↪

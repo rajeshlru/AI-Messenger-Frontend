@@ -13,9 +13,12 @@ const ThemeToggle = () => {
       }
       className={`
         fixed
-        top-5
-        right-5
-        z-50
+        top-4
+        left-56
+        lg:right-5
+        md:top-5
+        md:right-5
+        z-[9999]
         w-11
         h-11
         rounded-xl

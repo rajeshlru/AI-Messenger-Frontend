@@ -1,6 +1,6 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import ThemeToggle from "../components/ThemeToggle";
 
 function Home() {
   const { theme, toggleTheme } = useTheme();
@@ -14,8 +14,6 @@ function Home() {
           : "min-h-screen bg-[#f8f9fc] text-gray-900"
       }
     >
-      <ThemeToggle />
-
       <div
         className={`absolute inset-0 pointer-events-none opacity-[0.025] ${
           isLight
@@ -29,13 +27,13 @@ function Home() {
       <div className="absolute bottom-[-220px] right-[8%] w-[430px] h-[430px] rounded-full bg-purple-600/[0.08] blur-[140px] animate-[orbTwo_9s_ease-in-out_infinite]" />
 
       <nav
-        className={`relative z-20 h-[76px] sm:h-20 flex items-center justify-between max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 border-b ${
+        className={`relative z-20 min-h-[76px] sm:h-20 flex items-center justify-between max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 border-b ${
           isLight ? "border-gray-200/70" : "border-white/[0.05]"
         }`}
       >
         <Link
           to="/"
-          className="group flex items-center gap-3 animate-[fadeDown_0.6s_ease-out]"
+          className="group flex items-center gap-3 animate-[fadeDown_0.6s_ease-out] shrink-0"
         >
           <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-900/20 group-hover:scale-105 group-hover:rotate-2 transition-all duration-300">
             <span className="text-sm font-bold">AI</span>
@@ -60,26 +58,79 @@ function Home() {
           </div>
         </Link>
 
-        <div className="flex items-center gap-2 sm:gap-3 animate-[fadeDown_0.6s_ease-out_0.1s_both]">
-          <Link
-            to="/login"
-            className={`px-4 sm:px-5 py-2.5 rounded-xl text-sm font-medium border hover:-translate-y-0.5 transition-all duration-300 ${
-              isLight
-                ? "text-orange-600 border-gray-200 bg-white hover:text-gray-900 hover:bg-gray-50 hover:border-gray-300"
-                : "text-gray-400 border-white/[0.07] bg-white/[0.025] hover:text-white hover:bg-white/[0.06] hover:border-white/[0.13]"
-            }`}
-          >
-            Login
-          </Link>
+        <div className="flex  items-end gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 animate-[fadeDown_0.6s_ease-out_0.1s_both]">
+            <Link
+              to="/login"
+              className={`px-4 sm:px-5 py-2.5 rounded-xl text-sm font-medium border hover:-translate-y-0.5 transition-all duration-300 ${
+                isLight
+                  ? "text-orange-600 border-gray-200 bg-white hover:text-gray-900 hover:bg-gray-50 hover:border-gray-300"
+                  : "text-gray-400 border-white/[0.07] bg-white/[0.025] hover:text-white hover:bg-white/[0.06] hover:border-white/[0.13]"
+              }`}
+            >
+              Login
+            </Link>
 
-          <Link
-            to="/register"
-            className="group relative overflow-hidden px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-sm font-semibold shadow-lg shadow-blue-900/20 hover:shadow-purple-900/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-          >
-            <span className="absolute inset-y-0 -left-12 w-10 bg-white/20 skew-x-[-20deg] group-hover:left-[120%] transition-all duration-700" />
+            <Link
+              to="/register"
+              className="group relative overflow-hidden px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-sm font-semibold shadow-lg shadow-blue-900/20 hover:shadow-purple-900/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+            >
+              <span className="absolute inset-y-0 -left-12 w-10 bg-white/20 skew-x-[-20deg] group-hover:left-[120%] transition-all duration-700" />
 
-            <span className="relative">Get Started</span>
-          </Link>
+              <span className="relative">Get Started</span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              title={isLight ? "Switch to dark theme" : "Switch to light theme"}
+              className={`
+                hidden sm:flex
+                w-11
+                h-11
+                rounded-xl
+                items-center
+                justify-center
+                border
+                transition-all
+                duration-200
+                shrink-0
+
+                ${
+                  isLight
+                    ? "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
+                    : "bg-[#11161f] border-white/[0.08] text-gray-300 hover:bg-[#181e28] hover:text-white"
+                }
+              `}
+            >
+              {isLight ? "🌙" : "☀️"}
+            </button>
+          </div>
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            title={isLight ? "Switch to dark theme" : "Switch to light theme"}
+            className={`
+              flex sm:hidden
+              w-10
+              h-10
+              rounded-xl
+              items-center
+              justify-center
+              border
+              transition-all
+              duration-200
+
+              ${
+                isLight
+                  ? "bg-white border-gray-200 text-gray-700 hover:bg-gray-100"
+                  : "bg-[#11161f] border-white/[0.08] text-gray-300 hover:bg-[#181e28] hover:text-white"
+              }
+            `}
+          >
+            {isLight ? "🌙" : "☀️"}
+          </button>
         </div>
       </nav>
 
@@ -160,11 +211,7 @@ function Home() {
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50" />
 
-                <span
-                  className={`text-xs sm:text-sm ${
-                    isLight ? "text-gray-500" : "text-gray-500"
-                  }`}
-                >
+                <span className="text-xs sm:text-sm text-gray-500">
                   Ready to use
                 </span>
               </div>
@@ -176,11 +223,7 @@ function Home() {
               />
 
               <div className="flex items-center gap-2">
-                <span
-                  className={`text-xs sm:text-sm ${
-                    isLight ? "text-gray-500" : "text-gray-500"
-                  }`}
-                >
+                <span className="text-xs sm:text-sm text-gray-500">
                   Simple interface
                 </span>
               </div>
@@ -192,11 +235,7 @@ function Home() {
               />
 
               <div className="flex items-center gap-2">
-                <span
-                  className={`text-xs sm:text-sm ${
-                    isLight ? "text-gray-500" : "text-gray-500"
-                  }`}
-                >
+                <span className="text-xs sm:text-sm text-gray-500">
                   Built for conversations
                 </span>
               </div>
@@ -347,9 +386,7 @@ function Home() {
                     >
                       <div className="flex gap-1.5 items-center">
                         <span className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-bounce" />
-
                         <span className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-bounce [animation-delay:150ms]" />
-
                         <span className="w-1.5 h-1.5 rounded-full bg-gray-500 animate-bounce [animation-delay:300ms]" />
                       </div>
                     </div>
@@ -537,6 +574,7 @@ function Home() {
             0%, 100% {
               transform: translate(0, 0);
             }
+
             50% {
               transform: translate(40px, 30px);
             }
@@ -546,6 +584,7 @@ function Home() {
             0%, 100% {
               transform: translate(0, 0);
             }
+
             50% {
               transform: translate(-35px, -25px);
             }
@@ -556,10 +595,12 @@ function Home() {
               opacity: 0.5;
               transform: translateY(5px);
             }
+
             25%, 75% {
               opacity: 1;
               transform: translateY(0);
             }
+
             85%, 100% {
               opacity: 0.5;
               transform: translateY(5px);
@@ -571,10 +612,12 @@ function Home() {
               opacity: 0.4;
               transform: translateY(6px);
             }
+
             35%, 70% {
               opacity: 1;
               transform: translateY(0);
             }
+
             80%, 100% {
               opacity: 0.4;
               transform: translateY(6px);
@@ -586,10 +629,12 @@ function Home() {
               opacity: 0.3;
               transform: translateY(6px);
             }
+
             45%, 70% {
               opacity: 1;
               transform: translateY(0);
             }
+
             80%, 100% {
               opacity: 0.3;
               transform: translateY(6px);

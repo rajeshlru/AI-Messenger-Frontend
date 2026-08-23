@@ -501,33 +501,137 @@ function Register() {
                       character
                     </p>
                   </div>
-
                   <button
                     type="submit"
                     disabled={loading}
-                    className={`group relative w-full overflow-hidden py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-violet-600 text-white text-sm sm:text-base font-semibold shadow-lg shadow-blue-900/20 transition-all duration-300 ${
-                      loading
-                        ? "opacity-80 cursor-wait"
-                        : "hover:shadow-xl hover:shadow-violet-900/30 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98]"
-                    } animate-[buttonIn_0.6s_ease-out_0.7s_both]`}
-                  >
-                    {!loading && (
-                      <>
-                        <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/15 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                    className={`
+    group
+    relative
+    w-full
+    overflow-hidden
+    py-3.5
+    sm:py-4
+    rounded-xl
+    text-sm
+    sm:text-base
+    font-semibold
+    transition-all
+    duration-300
+    border
 
-                        <span className="absolute inset-0 rounded-xl ring-1 ring-white/0 group-hover:ring-white/20 transition-all duration-300" />
-                      </>
+    ${
+      isLight
+        ? `
+          bg-gradient-to-r
+          from-cyan-400
+          via-blue-500
+          to-violet-500
+          text-gray-950
+          border-blue-400/20
+          shadow-lg
+          shadow-blue-500/20
+        `
+        : `
+          bg-gradient-to-r
+          from-blue-500
+          via-indigo-500
+          to-violet-600
+          text-white
+          border-white/10
+          shadow-lg
+          shadow-violet-900/30
+        `
+    }
+
+    ${
+      loading
+        ? "cursor-wait opacity-95"
+        : `
+          hover:-translate-y-[2px]
+          hover:shadow-xl
+          active:translate-y-0
+          active:scale-[0.98]
+        `
+    }
+  `}
+                  >
+                    <span
+                      className={`
+      absolute
+      -inset-1
+      opacity-0
+      blur-xl
+      transition-opacity
+      duration-500
+      group-hover:opacity-30
+      pointer-events-none
+      ${
+        isLight
+          ? "bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500"
+          : "bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-600"
+      }
+    `}
+                    />
+
+                    {!loading && (
+                      <span
+                        className="
+        absolute
+        inset-0
+        -translate-x-full
+        bg-gradient-to-r
+        from-transparent
+        via-white/30
+        to-transparent
+        group-hover:translate-x-full
+        transition-transform
+        duration-700
+        ease-out
+        pointer-events-none
+      "
+                      />
                     )}
 
-                    <span className="relative flex items-center justify-center gap-2.5">
+                    <span className="relative z-10 flex items-center justify-center gap-3">
                       {loading ? (
                         <>
-                          <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <span
+                            className={`
+            w-5
+            h-5
+            sm:w-[22px]
+            sm:h-[22px]
+            rounded-full
+            border-[3px]
+            animate-spin
+            ${
+              isLight
+                ? "border-blue-900/20 border-t-blue-950 border-r-violet-900"
+                : "border-white/25 border-t-white border-r-cyan-200"
+            }
+          `}
+                          />
 
-                          <span>Creating account...</span>
+                          <span
+                            className={
+                              isLight
+                                ? "text-gray-950 font-semibold tracking-wide"
+                                : "text-white font-semibold tracking-wide"
+                            }
+                          >
+                            Creating account...
+                          </span>
                         </>
                       ) : (
-                        <span>Create Account</span>
+                        <span
+                          className={
+                            isLight
+                              ? "text-gray-950 font-semibold"
+                              : "text-white font-semibold"
+                          }
+                        >
+                          Create Account
+                        </span>
                       )}
                     </span>
                   </button>
